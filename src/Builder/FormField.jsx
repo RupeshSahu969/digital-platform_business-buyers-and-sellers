@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiMoreVertical, FiTrash2 } from 'react-icons/fi';
+import {FiTrash2 } from 'react-icons/fi';
 import { useFormBuilder } from '../AuthContext/AuthContext';
 
 const FormField = ({ field }) => {
-  const { selectedField, setSelectedField, deleteField } = useFormBuilder();
+  const { selectedField, deleteField } = useFormBuilder();
   const isSelected = selectedField?.id === field.id;
 
   const renderField = () => {

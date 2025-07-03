@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +22,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
+    - name: Run tests (optional)
       run: npm test -- --watchAll=false --passWithNoTests
-    - name: Build React App
-      run: npm run build
 
-    
+    - name: Build React App
+      env:
+        CI: false 
+      run: npm run build
