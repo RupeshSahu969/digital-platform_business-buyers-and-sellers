@@ -1,43 +1,75 @@
-import React from 'react';
-import { FiArrowLeft, FiEye, FiSave, FiShare2 } from 'react-icons/fi';
-import { useFormBuilder } from '../AuthContext/AuthContext';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaHome, FaPlusCircle, FaBars, FaArrowLeft } from 'react-icons/fa';
 
 const Navbar = () => {
-  const { formTitle, setFormTitle, saveTemplate } = useFormBuilder();
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const navItems = [
+    { path: '/', label: 'Home', icon: <FaHome /> },
+    { path: '/', label: 'Builder', icon: <FaPlusCircle /> },
+
+  ];
   return (
-    <header className="bg-white border-b shadow-sm p-3">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <button className="flex items-center text-xs sm:text-sm text-gray-600 hover:text-gray-800">
-            <FiArrowLeft className="mr-1" size={14} /> Back
-          </button>
-          <h1 className="text-base sm:text-lg font-bold text-gray-800">
-            <input 
-              type="text" 
-              value={formTitle}
-              onChange={(e) => setFormTitle(e.target.value)}
-              className="bg-transparent border-b border-transparent hover:border-gray-300 focus:border-indigo-500 focus:outline-none max-w-[120px] sm:max-w-none"
-            />
-          </h1>
-        </div>
-        <div className="flex space-x-2">
-          <button 
-            onClick={saveTemplate}
-            className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
-          >
-            <FiSave className="mr-1" size={12} /> Save
-          </button>
-          <button className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs bg-indigo-600 text-white rounded-md hover:bg-indigo-700 flex items-center">
-            <FiEye className="mr-1" size={12} /> Preview
-          </button>
-          <button className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center">
-            <FiShare2 className="mr-1" size={12} /> Share
-          </button>
+    <nav className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="text-xl font-bold text-black flex items-center gap-2">
+              <FaArrowLeft />
+              Back
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            {navItems.map(item => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${location.pathname === item.path
+                  ? 'bg-blue-100 text-blue-700'
+                  : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+              >
+                <span className="mr-2">{item.icon}</span>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <FaBars size={20} />
+            </button>
+          </div>
         </div>
       </div>
-    </header>
+      {isOpen && (
+        <div className="md:hidden bg-white border-t">
+          {navItems.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`block px-4 py-3 text-sm font-medium ${location.pathname === item.path
+                ? 'bg-blue-100 text-blue-700'
+                : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              onClick={() => setIsOpen(false)}
+            >
+              <div className="flex items-center">
+                <span className="mr-3">{item.icon}</span>
+                {item.label}
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
   );
-}
+};
 
 export default Navbar;
