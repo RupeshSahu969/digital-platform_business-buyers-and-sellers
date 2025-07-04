@@ -1,22 +1,17 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar";
+import { Route, Routes } from "react-router-dom";
 import BuilderPage from "./Pages/BuilderPage";
+import PreviewPage from "./Pages/PreviewPage";
+import SharePage from "./Pages/SharePage";
 
-function App() {
+export default function App() {
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<BuilderPage />} />
-            <Route path="/:templateId" element={<BuilderPage />} />
-          </Routes>
-        </main>
-      </div>
+      <Routes>
+        <Route path="/" element={<BuilderPage />} />
+        <Route path="/preview" element={<PreviewPage />} />
+        <Route path="/share" element={<SharePage />} />
+      </Routes>
     </>
   );
 }
-
-export default App;
