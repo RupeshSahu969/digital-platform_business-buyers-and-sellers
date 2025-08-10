@@ -11,7 +11,7 @@ This codebase demonstrates front-end engineering skills, UI/UX design, and produ
 ---
 
 ## Live / Demo
-> (If you deploy, add the demo URL here. Example: `https://your-deploy-url`)
+> https://bejewelled-ganache-9aaba3.netlify.app/
 
 ---
 
