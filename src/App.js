@@ -1,17 +1,27 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import BuilderPage from "./Pages/BuilderPage";
-import PreviewPage from "./Pages/PreviewPage";
-import SharePage from "./Pages/SharePage";
+import React from 'react';
+import {  Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './Pages/Home';
+import Onboarding from './Pages/Onboarding';
+import BuyerDiscovery from './Pages/BuyerDiscovery';
+import Matched from './Pages/Matched';
+import Signup from './Pages/Signup';
 
-export default function App() {
+
+function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<BuilderPage />} />
-        <Route path="/preview" element={<PreviewPage />} />
-        <Route path="/share" element={<SharePage />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} /> {/* Add the new route */}
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/discovery" element={<BuyerDiscovery />} />
+          <Route path="/matched/:matchId" element={<Matched />} />
+        </Routes>
+      </Layout>
     </>
   );
 }
+
+export default App;
